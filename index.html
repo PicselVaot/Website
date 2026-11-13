@@ -2,13 +2,49 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://raw.githubusercontent.com; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio Axelle Viandier</title>
-    <script type="module" crossorigin src="/assets/index-Beui0lJe.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DQzA-Z70.css">
+    <title>Axelle Viandier · Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio d'Axelle Viandier : étudiante en informatique (parcours CAPES NSI), projets Python et C, CV et contact."
+    />
+    <meta name="author" content="Axelle Viandier" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0f1a" media="(prefers-color-scheme: dark)" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Aperçu lors du partage (LinkedIn, Discord, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Axelle Viandier" />
+    <meta property="og:title" content="Axelle Viandier · Portfolio" />
+    <meta
+      property="og:description"
+      content="Étudiante en informatique (parcours CAPES NSI) : projets, CV et contact."
+    />
+    <meta property="og:url" content="https://picselvaot.fr/" />
+    <meta property="og:image" content="https://picselvaot.fr/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Applique le thème avant l'affichage pour éviter le flash blanc -->
+    <script src="/theme-init.js"></script>
+    <script type="module" crossorigin src="/assets/index-DkUqtdxc.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BMwZp2nB.css">
   </head>
 
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <noscript>
+        <p style="padding: 20px">
+          Ce site nécessite JavaScript. Vous pouvez me contacter à
+          <a href="mailto:axelleviandier@gmail.com">axelleviandier@gmail.com</a>.
+        </p>
+      </noscript>
+    </div>
   </body>
 </html>

@@ -1,5 +1,42 @@
-RewriteEngine On
+Options -Indexes
 
+# ===== HTTPS =====
+# (Le test X-Forwarded-Proto évite une boucle si l'hébergeur termine le TLS en amont.)
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ===== SPA : toutes les routes inconnues → index.html =====
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.html [L]
+
+# ===== COMPRESSION =====
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain application/javascript application/json image/svg+xml application/xml
+</IfModule>
+
+<IfModule mod_headers.c>
+  # ===== SÉCURITÉ =====
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+  # ===== CACHE =====
+  # Fichiers générés par Vite (nom hashé, ex. index-Beui0lJe.js) : cache 1 an.
+  <FilesMatch "-[A-Za-z0-9_-]{8}\.(js|css)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Images, icônes, CV : 1 semaine.
+  <FilesMatch "\.(webp|png|svg|pdf)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+
+  # index.html : toujours revalider pour voir les nouvelles versions.
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
